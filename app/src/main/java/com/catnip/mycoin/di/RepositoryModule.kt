@@ -1,8 +1,11 @@
 package com.catnip.mycoin.di
 
+import com.catnip.mycoin.data.local.datasource.LocalDataSource
+import com.catnip.mycoin.data.network.datasource.auth.AuthApiDataSource
 import com.catnip.mycoin.data.network.datasource.coin.CoinGeckoDataSource
 import com.catnip.mycoin.ui.coindetail.CoinDetailRepository
 import com.catnip.mycoin.ui.coinlist.CoinListRepository
+import com.catnip.mycoin.ui.splashscreen.SplashScreenRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,4 +31,15 @@ object RepositoryModule {
     fun provideCoinDetailRepository(coinGeckoDataSource: CoinGeckoDataSource): CoinDetailRepository {
         return CoinDetailRepository(coinGeckoDataSource)
     }
+
+    @Singleton
+    @Provides
+    fun provideSplashScreenRepository(
+        authApiDataSource: AuthApiDataSource,
+        localDataSource: LocalDataSource
+    ): SplashScreenRepository {
+        return SplashScreenRepository(authApiDataSource, localDataSource)
+    }
+
+
 }
