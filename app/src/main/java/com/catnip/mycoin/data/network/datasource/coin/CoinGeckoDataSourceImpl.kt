@@ -10,7 +10,8 @@ import javax.inject.Inject
 Written with love by Muhammad Hermas Yuda Pamungkas
 Github : https://github.com/hermasyp
  **/
-class CoinGeckoDataSourceImpl @Inject constructor(private val coinGeckoApiServices: CoinGeckoApiServices) : CoinGeckoDataSource {
+class CoinGeckoDataSourceImpl
+@Inject constructor(private val coinGeckoApiServices: CoinGeckoApiServices) : CoinGeckoDataSource {
     override suspend fun getCoinList(): List<Coin> {
         return coinGeckoApiServices.getCoinList()
     }

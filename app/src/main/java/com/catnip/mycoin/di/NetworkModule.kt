@@ -20,7 +20,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideBinarApiServices(localDataSource: LocalDataSource): AuthApiService {
+    fun provideAuthApiServices(localDataSource: LocalDataSource): AuthApiService {
         return AuthApiService.invoke(localDataSource)
     }
 
