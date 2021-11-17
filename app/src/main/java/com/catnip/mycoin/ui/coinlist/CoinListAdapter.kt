@@ -52,7 +52,7 @@ class CoinListAdapter(private val itemClick: (Coin) -> Unit) :
                 itemView.setOnClickListener { itemClick(this) }
                 binding.ivIconCoin.load(image)
                 binding.tvCoinName.text = name
-                binding.tvCoinSymbol.text = symbol
+                binding.tvCoinSymbol.text = symbol?.uppercase()
                 binding.tvCoinPrice.text = itemView.context.getString(
                     R.string.text_placeholder_coin_price,
                     currentPrice.toString()

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.catnip.mycoin.base.Resource
 import com.catnip.mycoin.data.network.model.response.coin.Coin
 import com.catnip.mycoin.databinding.ActivityCoinListBinding
+import com.catnip.mycoin.ui.coindetail.CoinDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -73,7 +74,7 @@ class CoinListActivity : AppCompatActivity(), CoinListContract.View {
 
     override fun initList() {
         adapter = CoinListAdapter {
-            //todo : navigate to detail , bringing coin id to get the detail from API
+            CoinDetailActivity.startActivity(this,it.id.orEmpty())
         }
         binding.rvContent.apply {
             adapter = this@CoinListActivity.adapter

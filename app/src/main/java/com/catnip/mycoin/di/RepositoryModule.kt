@@ -1,6 +1,7 @@
 package com.catnip.mycoin.di
 
 import com.catnip.mycoin.data.network.datasource.coin.CoinGeckoDataSource
+import com.catnip.mycoin.ui.coindetail.CoinDetailRepository
 import com.catnip.mycoin.ui.coinlist.CoinListRepository
 import dagger.Module
 import dagger.Provides
@@ -20,5 +21,11 @@ object RepositoryModule {
     @Singleton
     fun provideCoinListRepository(coinGeckoDataSource: CoinGeckoDataSource): CoinListRepository {
         return CoinListRepository(coinGeckoDataSource)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCoinDetailRepository(coinGeckoDataSource: CoinGeckoDataSource): CoinDetailRepository {
+        return CoinDetailRepository(coinGeckoDataSource)
     }
 }

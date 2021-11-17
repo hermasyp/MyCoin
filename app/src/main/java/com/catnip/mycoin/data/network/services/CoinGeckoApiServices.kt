@@ -20,7 +20,7 @@ interface CoinGeckoApiServices {
     @GET("coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&sparkline=false")
     suspend fun getCoinList(): List<Coin>
 
-    @GET("/coins/{coinID}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false")
+    @GET("coins/{coinID}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false")
     suspend fun getCoinList(@Path("coinID") coinID : String): CoinDetailResponse
 
 
