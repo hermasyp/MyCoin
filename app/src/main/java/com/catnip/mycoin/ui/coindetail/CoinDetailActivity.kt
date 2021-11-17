@@ -101,7 +101,7 @@ class CoinDetailActivity : AppCompatActivity(), CoinDetailContract.View {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == android.R.id.home){
+        if (item.itemId == android.R.id.home) {
             onBackPressed()
         }
         return super.onOptionsItemSelected(item)
@@ -110,10 +110,11 @@ class CoinDetailActivity : AppCompatActivity(), CoinDetailContract.View {
 
     private fun generateChips(categories: List<String>?) {
         categories?.forEach {
-            val chip = Chip(this)
-            chip.text = it
-            chip.isClickable = false
-            binding.cgCategory.addView(chip)
+            binding.cgCategory.addView(
+                Chip(this).apply {
+                    text = it
+                    isClickable = false
+                })
         }
     }
 
