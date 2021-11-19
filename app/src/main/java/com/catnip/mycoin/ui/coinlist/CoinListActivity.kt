@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.catnip.mycoin.R
+import com.catnip.mycoin.base.BaseActivity
 import com.catnip.mycoin.base.Resource
 import com.catnip.mycoin.data.network.model.response.coin.Coin
 import com.catnip.mycoin.databinding.ActivityCoinListBinding
@@ -18,44 +19,42 @@ import com.catnip.mycoin.ui.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CoinListActivity : AppCompatActivity(), CoinListContract.View {
-    private lateinit var binding: ActivityCoinListBinding
-    private lateinit var adapter: CoinListAdapter
-    private val viewModel: CoinListViewModel by viewModels()
+class CoinListActivity : BaseActivity<ActivityCoinListBinding,CoinListViewModel>(
+    ActivityCoinListBinding::inflate
+), CoinListContract.View {
+    override val viewModelInstance: CoinListViewModel by viewModels()
 
+    private lateinit var adapter: CoinListAdapter
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initView()
-        observeViewModel()
         getData()
     }
 
     override fun getData() {
-        viewModel.getCoinList()
+        getViewModel().getCoinList()
     }
 
     override fun initView() {
-        binding = ActivityCoinListBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         initSwipeRefresh()
         initList()
     }
 
     override fun showLoading(isLoading: Boolean) {
-        binding.pbLoading.isVisible = isLoading
+        getViewBinding().pbLoading.isVisible = isLoading
     }
 
     override fun showContent(isContentShown: Boolean) {
-        binding.rvContent.isVisible = isContentShown
+        getViewBinding().rvContent.isVisible = isContentShown
     }
 
     override fun showErrMsg(isError: Boolean, msg: String?) {
-        binding.tvMessage.isVisible = isError
-        binding.tvMessage.text = msg
+        getViewBinding().tvMessage.isVisible = isError
+        getViewBinding().tvMessage.text = msg
     }
 
-    override fun observeViewModel() {
-        viewModel.getCoinListLiveData().observe(this) {
+    override fun initViewModel() {
+        getViewModel().getCoinListLiveData().observe(this) {
             when (it) {
                 is Resource.Loading -> {
                     showLoading(true)
@@ -82,7 +81,7 @@ class CoinListActivity : AppCompatActivity(), CoinListContract.View {
         adapter = CoinListAdapter {
             CoinDetailActivity.startActivity(this, it.id.orEmpty())
         }
-        binding.rvContent.apply {
+        getViewBinding().rvContent.apply {
             adapter = this@CoinListActivity.adapter
             layoutManager = LinearLayoutManager(this@CoinListActivity)
         }
@@ -93,8 +92,8 @@ class CoinListActivity : AppCompatActivity(), CoinListContract.View {
     }
 
     override fun initSwipeRefresh() {
-        binding.srlContent.setOnRefreshListener {
-            binding.srlContent.isRefreshing = false
+        getViewBinding().srlContent.setOnRefreshListener {
+            getViewBinding().srlContent.isRefreshing = false
             getData()
         }
     }
@@ -128,7 +127,7 @@ class CoinListActivity : AppCompatActivity(), CoinListContract.View {
     }
 
     private fun logout() {
-        viewModel.deleteSession()
+        getViewModel().deleteSession()
         navigateToLogin()
     }
 
@@ -138,4 +137,5 @@ class CoinListActivity : AppCompatActivity(), CoinListContract.View {
         startActivity(intent)
         finish()
     }
+
 }

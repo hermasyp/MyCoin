@@ -18,8 +18,6 @@ interface CoinDetailContract {
     }
 
     interface View {
-        fun initView()
-        fun initViewModel()
         fun showContent(isContentVisible: Boolean)
         fun showLoading(isLoading: Boolean)
         fun showError(isErrorEnabled: Boolean, msg: String?)

@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.catnip.mycoin.base.BaseActivity
 import com.catnip.mycoin.base.Resource
 import com.catnip.mycoin.databinding.ActivitySplashScreenBinding
 import com.catnip.mycoin.ui.coinlist.CoinListActivity
@@ -17,26 +18,21 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SplashScreenActivity : AppCompatActivity(), SplashScreenContract.View {
-
-    private lateinit var binding: ActivitySplashScreenBinding
-    private val viewModel: SplashScreenViewModel by viewModels()
+class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding,SplashScreenViewModel>(
+    ActivitySplashScreenBinding::inflate
+), SplashScreenContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initView()
-        initViewModel()
         checkLoginStatus()
     }
 
     override fun initView() {
-        binding = ActivitySplashScreenBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         supportActionBar?.hide()
     }
 
     override fun initViewModel() {
-        viewModel.getSyncUserLiveData().observe(this) {
+        getViewModel().getSyncUserLiveData().observe(this) {
             when (it) {
                 is Resource.Loading -> {
                     Log.d(TAG, "initViewModel: Loading")
@@ -53,8 +49,8 @@ class SplashScreenActivity : AppCompatActivity(), SplashScreenContract.View {
     }
 
     override fun checkLoginStatus() {
-        if (viewModel.isUserLoggedIn()) {
-            viewModel.getSyncUser()
+        if (getViewModel().isUserLoggedIn()) {
+            getViewModel().getSyncUser()
         } else {
             lifecycleScope.launch(Dispatchers.IO) {
                 delay(1000)
@@ -66,7 +62,7 @@ class SplashScreenActivity : AppCompatActivity(), SplashScreenContract.View {
     }
 
     override fun deleteSession() {
-        viewModel.clearSession()
+        getViewModel().clearSession()
     }
 
     override fun navigateToLogin() {
@@ -86,4 +82,6 @@ class SplashScreenActivity : AppCompatActivity(), SplashScreenContract.View {
     companion object {
         private val TAG = SplashScreenActivity::class.simpleName
     }
+
+    override val viewModelInstance: SplashScreenViewModel by viewModels()
 }
