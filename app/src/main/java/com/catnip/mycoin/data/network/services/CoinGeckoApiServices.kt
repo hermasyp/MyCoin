@@ -3,6 +3,7 @@ package com.catnip.mycoin.data.network.services
 import com.catnip.mycoin.BuildConfig
 import com.catnip.mycoin.data.network.model.response.coin.Coin
 import com.catnip.mycoin.data.network.model.response.coin.detail.CoinDetailResponse
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -26,8 +27,9 @@ interface CoinGeckoApiServices {
 
     companion object {
         @JvmStatic
-        operator fun invoke() : CoinGeckoApiServices {
+        operator fun invoke(chuckerInterceptor : ChuckerInterceptor) : CoinGeckoApiServices {
             val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(chuckerInterceptor)
                 .connectTimeout(120, TimeUnit.SECONDS)
                 .readTimeout(120, TimeUnit.SECONDS)
                 .build()

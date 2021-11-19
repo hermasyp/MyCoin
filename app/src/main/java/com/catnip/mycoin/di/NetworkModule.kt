@@ -1,11 +1,15 @@
 package com.catnip.mycoin.di
 
+import android.content.Context
+import com.catnip.mycoin.data.local.SessionPreference
 import com.catnip.mycoin.data.local.datasource.LocalDataSource
 import com.catnip.mycoin.data.network.services.AuthApiService
 import com.catnip.mycoin.data.network.services.CoinGeckoApiServices
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -20,13 +24,19 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideAuthApiServices(localDataSource: LocalDataSource): AuthApiService {
-        return AuthApiService.invoke(localDataSource)
+    fun provideAuthApiServices(localDataSource: LocalDataSource,chuckerInterceptor : ChuckerInterceptor): AuthApiService {
+        return AuthApiService.invoke(localDataSource,chuckerInterceptor)
     }
 
     @Singleton
     @Provides
-    fun provideCoinGeckoApiServices(): CoinGeckoApiServices {
-        return CoinGeckoApiServices.invoke()
+    fun provideCoinGeckoApiServices(chuckerInterceptor : ChuckerInterceptor): CoinGeckoApiServices {
+        return CoinGeckoApiServices.invoke(chuckerInterceptor)
+    }
+
+    @Singleton
+    @Provides
+    fun provideChuckerInterceptor(@ApplicationContext context : Context) : ChuckerInterceptor {
+        return ChuckerInterceptor.Builder(context).build()
     }
 }

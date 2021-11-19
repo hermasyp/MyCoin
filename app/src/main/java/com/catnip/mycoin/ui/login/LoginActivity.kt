@@ -1,12 +1,11 @@
 package com.catnip.mycoin.ui.login
 
 import android.content.Intent
-import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import com.catnip.mycoin.R
+import com.catnip.mycoin.base.BaseActivity
 import com.catnip.mycoin.base.Resource
 import com.catnip.mycoin.data.network.model.request.auth.AuthRequest
 import com.catnip.mycoin.databinding.ActivityLoginBinding
@@ -16,34 +15,27 @@ import com.catnip.mycoin.utils.StringUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginActivity : AppCompatActivity(), LoginContract.View {
-    private lateinit var binding: ActivityLoginBinding
-    private val viewModel: LoginViewModel by viewModels()
+class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
+    ActivityLoginBinding::inflate
+), LoginContract.View {
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        initView()
-    }
 
     override fun setToolbar() {
         supportActionBar?.title = getString(R.string.text_title_toolbar_login)
     }
 
     override fun setOnClick() {
-        binding.btnLogin.setOnClickListener {
+        getViewBinding().btnLogin.setOnClickListener {
             if (checkFormValidation()) {
-                viewModel.loginUser(
+                getViewModel().loginUser(
                     AuthRequest(
-                        email = binding.etEmail.text.toString(),
-                        password = binding.etPassword.text.toString()
+                        email = getViewBinding().etEmail.text.toString(),
+                        password = getViewBinding().etPassword.text.toString()
                     )
                 )
             }
         }
-        binding.btnNavigateRegister.setOnClickListener {
+        getViewBinding().btnNavigateRegister.setOnClickListener {
             navigateToRegister()
         }
     }
@@ -61,36 +53,36 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     }
 
     override fun setLoadingState(isLoadingVisible: Boolean) {
-        binding.pbLoading.visibility = if (isLoadingVisible) View.VISIBLE else View.GONE
+        getViewBinding().pbLoading.visibility = if (isLoadingVisible) View.VISIBLE else View.GONE
     }
 
     override fun checkFormValidation(): Boolean {
-        val email = binding.etEmail.text.toString()
-        val password = binding.etPassword.text.toString()
+        val email = getViewBinding().etEmail.text.toString()
+        val password = getViewBinding().etPassword.text.toString()
         var isFormValid = true
         //for checking is email empty
         when {
             email.isEmpty() -> {
                 isFormValid = false
-                binding.tilEmail.isErrorEnabled = true
-                binding.tilEmail.error = getString(R.string.error_email_empty)
+                getViewBinding().tilEmail.isErrorEnabled = true
+                getViewBinding().tilEmail.error = getString(R.string.error_email_empty)
             }
             StringUtils.isEmailValid(email).not() -> {
                 isFormValid = false
-                binding.tilEmail.isErrorEnabled = true
-                binding.tilEmail.error = getString(R.string.error_email_invalid)
+                getViewBinding().tilEmail.isErrorEnabled = true
+                getViewBinding().tilEmail.error = getString(R.string.error_email_invalid)
             }
             else -> {
-                binding.tilEmail.isErrorEnabled = false
+                getViewBinding().tilEmail.isErrorEnabled = false
             }
         }
         //for checking is Password empty
         if (password.isEmpty()) {
             isFormValid = false
-            binding.tilPassword.isErrorEnabled = true
-            binding.tilPassword.error = getString(R.string.error_password_empty)
+            getViewBinding().tilPassword.isErrorEnabled = true
+            getViewBinding().tilPassword.error = getString(R.string.error_password_empty)
         } else {
-            binding.tilPassword.isErrorEnabled = false
+            getViewBinding().tilPassword.isErrorEnabled = false
         }
         return isFormValid
     }
@@ -102,7 +94,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     }
 
     override fun initViewModel() {
-        viewModel.getLoginResultLiveData().observe(this, { response ->
+        getViewModel().getLoginResultLiveData().observe(this, { response ->
             when (response) {
                 is Resource.Loading -> {
                     setLoadingState(true)
@@ -128,7 +120,9 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     override fun saveSessionLogin(authToken: String?) {
         authToken?.let {
-            saveSessionLogin(it)
+            getViewModel().saveSession(authToken)
         }
     }
+
+    override val viewModelInstance: LoginViewModel by viewModels()
 }
