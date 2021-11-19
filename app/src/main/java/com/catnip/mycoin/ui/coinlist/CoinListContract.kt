@@ -11,9 +11,9 @@ Github : https://github.com/hermasyp
 interface CoinListContract {
     interface View {
         fun initView()
-        fun showLoading(isLoading : Boolean)
-        fun showContent(isContentShown : Boolean)
-        fun showErrMsg(isError : Boolean,msg : String?)
+        fun showLoading(isLoading: Boolean)
+        fun showContent(isContentShown: Boolean)
+        fun showErrMsg(isError: Boolean, msg: String?)
         fun observeViewModel()
         fun initList()
         fun getData()
@@ -23,9 +23,11 @@ interface CoinListContract {
     interface ViewModel {
         fun getCoinListLiveData(): LiveData<Resource<List<Coin>>>
         fun getCoinList()
+        fun deleteSession()
     }
 
     interface Repository {
         suspend fun getCoinList(): List<Coin>
+        fun deleteSession()
     }
 }

@@ -22,8 +22,11 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideCoinListRepository(coinGeckoDataSource: CoinGeckoDataSource): CoinListRepository {
-        return CoinListRepository(coinGeckoDataSource)
+    fun provideCoinListRepository(
+        coinGeckoDataSource: CoinGeckoDataSource,
+        localDataSource: LocalDataSource
+    ): CoinListRepository {
+        return CoinListRepository(coinGeckoDataSource, localDataSource)
     }
 
     @Singleton

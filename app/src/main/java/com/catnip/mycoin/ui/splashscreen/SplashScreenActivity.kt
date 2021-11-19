@@ -6,11 +6,15 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.catnip.mycoin.base.Resource
 import com.catnip.mycoin.databinding.ActivitySplashScreenBinding
 import com.catnip.mycoin.ui.coinlist.CoinListActivity
 import com.catnip.mycoin.ui.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SplashScreenActivity : AppCompatActivity(), SplashScreenContract.View {
@@ -52,7 +56,12 @@ class SplashScreenActivity : AppCompatActivity(), SplashScreenContract.View {
         if (viewModel.isUserLoggedIn()) {
             viewModel.getSyncUser()
         } else {
-            navigateToLogin()
+            lifecycleScope.launch(Dispatchers.IO) {
+                delay(1000)
+                lifecycleScope.launch(Dispatchers.Main){
+                    navigateToLogin()
+                }
+            }
         }
     }
 

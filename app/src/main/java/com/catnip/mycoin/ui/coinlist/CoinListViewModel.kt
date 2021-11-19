@@ -9,7 +9,6 @@ import com.catnip.mycoin.data.network.model.response.coin.Coin
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 /**
@@ -32,13 +31,17 @@ class CoinListViewModel @Inject constructor(private val repository: CoinListRepo
                 viewModelScope.launch(Dispatchers.Main) {
                     coinListResponseLiveData.value = Resource.Success(response)
                 }
-            }catch (e : Exception){
+            } catch (e: Exception) {
                 viewModelScope.launch(Dispatchers.Main) {
                     coinListResponseLiveData.value = Resource.Error(e.message.orEmpty())
                 }
             }
         }
 
+    }
+
+    override fun deleteSession() {
+        repository.deleteSession()
     }
 
 }
