@@ -14,6 +14,13 @@ interface LoginContract {
     interface View {
         fun initView()
         fun initViewModel()
+        fun setToolbar()
+        fun setOnClick()
+        fun navigateToHome()
+        fun navigateToRegister()
+        fun setLoadingState(isLoadingVisible: Boolean)
+        fun checkFormValidation() : Boolean
+        fun saveSessionLogin(authToken : String?)
     }
 
     interface ViewModel {

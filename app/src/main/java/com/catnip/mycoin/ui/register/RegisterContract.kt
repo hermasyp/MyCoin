@@ -14,6 +14,11 @@ interface RegisterContract {
     interface View {
         fun initView()
         fun initViewModel()
+        fun setToolbar()
+        fun setOnClick()
+        fun setLoadingState(isLoadingVisible: Boolean)
+        fun checkFormValidation() : Boolean
+        fun navigateToLogin()
     }
 
     interface ViewModel {

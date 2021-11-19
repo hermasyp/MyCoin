@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.catnip.mycoin.base.Resource
 import com.catnip.mycoin.databinding.ActivitySplashScreenBinding
 import com.catnip.mycoin.ui.coinlist.CoinListActivity
+import com.catnip.mycoin.ui.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -60,11 +61,10 @@ class SplashScreenActivity : AppCompatActivity(), SplashScreenContract.View {
     }
 
     override fun navigateToLogin() {
-/*        val intent = Intent(this, CoinListActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
-        finish()*/
-        Toast.makeText(this, "Navigate to login", Toast.LENGTH_SHORT).show()
+        finish()
     }
 
     override fun navigateToHome() {
