@@ -5,6 +5,7 @@ import com.catnip.mycoin.data.local.datasource.LocalDataSource
 import com.catnip.mycoin.data.network.model.request.auth.AuthRequest
 import com.catnip.mycoin.data.network.model.response.auth.BaseAuthResponse
 import com.catnip.mycoin.data.network.model.response.auth.UserData
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
@@ -39,7 +40,7 @@ interface AuthApiService {
 
     companion object {
         @JvmStatic
-        operator fun invoke(localDataSource: LocalDataSource) : AuthApiService {
+        operator fun invoke(localDataSource: LocalDataSource,chuckerInterceptor: ChuckerInterceptor) : AuthApiService {
             val authInterceptor = Interceptor {
                 val requestBuilder = it.request().newBuilder()
                 localDataSource.getAuthToken()?.let { token ->
@@ -49,6 +50,7 @@ interface AuthApiService {
             }
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(authInterceptor)
+                .addInterceptor(chuckerInterceptor)
                 .connectTimeout(120, TimeUnit.SECONDS)
                 .readTimeout(120, TimeUnit.SECONDS)
                 .build()
