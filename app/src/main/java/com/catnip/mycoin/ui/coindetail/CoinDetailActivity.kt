@@ -58,12 +58,12 @@ class CoinDetailActivity :
         }
     }
 
-    override fun showContent(isContentVisible: Boolean) {
-        getViewBinding().groupContent.isVisible = isContentVisible
+    override fun showContent(isVisible: Boolean) {
+        getViewBinding().groupContent.isVisible = isVisible
     }
 
-    override fun showLoading(isLoading: Boolean) {
-        getViewBinding().pbLoading.isVisible = isLoading
+    override fun showLoading(isVisible: Boolean) {
+        getViewBinding().pbLoading.isVisible = isVisible
     }
 
     override fun showError(isErrorEnabled: Boolean, msg: String?) {
