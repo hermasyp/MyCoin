@@ -1,6 +1,7 @@
 package com.catnip.mycoin.ui.splashscreen
 
-import com.catnip.mycoin.data.local.datasource.LocalDataSource
+import com.catnip.mycoin.base.arch.BaseRepositoryImpl
+import com.catnip.mycoin.data.local.preference.datasource.LocalDataSource
 import com.catnip.mycoin.data.network.datasource.auth.AuthApiDataSource
 import com.catnip.mycoin.data.network.model.response.auth.BaseAuthResponse
 import com.catnip.mycoin.data.network.model.response.auth.UserData
@@ -13,7 +14,7 @@ Github : https://github.com/hermasyp
 class SplashScreenRepository @Inject constructor(
     private val authApiDataSource: AuthApiDataSource,
     private val localDataSource: LocalDataSource
-) : SplashScreenContract.Repository {
+) :BaseRepositoryImpl(), SplashScreenContract.Repository {
     override fun isUserLoggedIn(): Boolean {
         return localDataSource.isUserLoggedIn()
     }

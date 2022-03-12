@@ -2,9 +2,9 @@ package com.catnip.mycoin.ui.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.catnip.mycoin.base.Resource
+import com.catnip.mycoin.base.model.Resource
+import com.catnip.mycoin.base.arch.BaseViewModelImpl
 import com.catnip.mycoin.data.network.model.request.auth.AuthRequest
 import com.catnip.mycoin.data.network.model.response.auth.UserData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +18,7 @@ Github : https://github.com/hermasyp
  **/
 @HiltViewModel
 class LoginViewModel @Inject constructor(private val repository: LoginRepository) :
-    ViewModel(), LoginContract.ViewModel {
+    BaseViewModelImpl(), LoginContract.ViewModel {
 
     private val syncUserLiveData = MutableLiveData<Resource<UserData>>()
 

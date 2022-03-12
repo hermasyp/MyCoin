@@ -1,4 +1,4 @@
-package com.catnip.mycoin.data.local;
+package com.catnip.mycoin.data.local.preference;
 
 import android.content.Context
 import android.content.SharedPreferences

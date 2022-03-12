@@ -1,4 +1,4 @@
-package com.catnip.mycoin.base
+package com.catnip.mycoin.base.model
 
 /**
 Written with love by Muhammad Hermas Yuda Pamungkas

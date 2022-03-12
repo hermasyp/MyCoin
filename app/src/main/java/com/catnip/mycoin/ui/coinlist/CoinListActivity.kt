@@ -4,14 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.catnip.mycoin.R
-import com.catnip.mycoin.base.BaseActivity
-import com.catnip.mycoin.base.Resource
+import com.catnip.mycoin.base.arch.BaseActivity
+import com.catnip.mycoin.base.model.Resource
 import com.catnip.mycoin.data.network.model.response.coin.Coin
 import com.catnip.mycoin.databinding.ActivityCoinListBinding
 import com.catnip.mycoin.ui.coindetail.CoinDetailActivity
@@ -19,13 +17,12 @@ import com.catnip.mycoin.ui.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CoinListActivity : BaseActivity<ActivityCoinListBinding,CoinListViewModel>(
+class CoinListActivity : BaseActivity<ActivityCoinListBinding, CoinListViewModel>(
     ActivityCoinListBinding::inflate
 ), CoinListContract.View {
-    override val viewModelInstance: CoinListViewModel by viewModels()
 
     private lateinit var adapter: CoinListAdapter
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getData()
@@ -48,29 +45,29 @@ class CoinListActivity : BaseActivity<ActivityCoinListBinding,CoinListViewModel>
         getViewBinding().rvContent.isVisible = isContentShown
     }
 
-    override fun showErrMsg(isError: Boolean, msg: String?) {
-        getViewBinding().tvMessage.isVisible = isError
+    override fun showError(isErrorEnabled: Boolean, msg: String?) {
+        getViewBinding().tvMessage.isVisible = isErrorEnabled
         getViewBinding().tvMessage.text = msg
     }
 
-    override fun initViewModel() {
+    override fun observeData() {
         getViewModel().getCoinListLiveData().observe(this) {
             when (it) {
                 is Resource.Loading -> {
                     showLoading(true)
                     showContent(false)
-                    showErrMsg(false, null)
+                    showError(false, null)
                 }
                 is Resource.Success -> {
                     showLoading(false)
                     showContent(true)
-                    showErrMsg(false, null)
+                    showError(false, null)
                     setDataAdapter(it.data)
                 }
                 is Resource.Error -> {
                     showLoading(false)
                     showContent(false)
-                    showErrMsg(true, it.message)
+                    showError(true, it.message)
                 }
             }
         }
@@ -116,11 +113,11 @@ class CoinListActivity : BaseActivity<ActivityCoinListBinding,CoinListViewModel>
         AlertDialog.Builder(this)
             .apply {
                 setTitle(getString(R.string.text_logout_dialog))
-                setPositiveButton(R.string.text_dialog_logout_task_positive) { dialog, id ->
+                setPositiveButton(R.string.text_dialog_logout_task_positive) { dialog, _ ->
                     logout()
                     dialog.dismiss()
                 }
-                setNegativeButton(R.string.text_dialog_logout_task_negative) { dialog, id ->
+                setNegativeButton(R.string.text_dialog_logout_task_negative) { dialog, _ ->
                     dialog.dismiss()
                 }
             }.create().show()

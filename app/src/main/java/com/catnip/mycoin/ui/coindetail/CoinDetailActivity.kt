@@ -4,14 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.view.MenuItem
 import android.view.View
-import androidx.activity.viewModels
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.catnip.mycoin.R
-import com.catnip.mycoin.base.BaseActivity
-import com.catnip.mycoin.base.Resource
+import com.catnip.mycoin.base.arch.BaseActivity
+import com.catnip.mycoin.base.model.Resource
 import com.catnip.mycoin.data.network.model.response.coin.detail.CoinDetailResponse
 import com.catnip.mycoin.databinding.ActivityCoinDetailBinding
 import com.catnip.mycoin.utils.Extension.textFromHtml
@@ -23,15 +22,13 @@ class CoinDetailActivity :
     BaseActivity<ActivityCoinDetailBinding, CoinDetailViewModel>(ActivityCoinDetailBinding::inflate),
     CoinDetailContract.View {
 
-    override val viewModelInstance: CoinDetailViewModel by viewModels()
-
     override fun initView() {
         getIntentData()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = null
     }
 
-    override fun initViewModel() {
+    override fun observeData() {
         getViewModel().getCoinDetailResponse().observe(this) {
             when (it) {
                 is Resource.Loading -> {
@@ -103,7 +100,7 @@ class CoinDetailActivity :
     }
 
     private fun generateChips(categories: List<String>?) {
-        categories?.forEach {
+        categories?.filter { it.isNotEmpty() }?.forEach {
             getViewBinding().cgCategory.addView(
                 Chip(this).apply {
                     text = it

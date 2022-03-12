@@ -1,8 +1,7 @@
 package com.catnip.mycoin.di
 
 import android.content.Context
-import com.catnip.mycoin.data.local.SessionPreference
-import com.catnip.mycoin.data.local.datasource.LocalDataSource
+import com.catnip.mycoin.data.local.preference.datasource.LocalDataSource
 import com.catnip.mycoin.data.network.services.AuthApiService
 import com.catnip.mycoin.data.network.services.CoinGeckoApiServices
 import com.chuckerteam.chucker.api.ChuckerInterceptor

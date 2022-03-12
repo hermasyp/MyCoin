@@ -1,8 +1,8 @@
 package com.catnip.mycoin.di
 
-import com.catnip.mycoin.data.local.SessionPreference
-import com.catnip.mycoin.data.local.datasource.LocalDataSource
-import com.catnip.mycoin.data.local.datasource.LocalDataSourceImpl
+import com.catnip.mycoin.data.local.preference.SessionPreference
+import com.catnip.mycoin.data.local.preference.datasource.LocalDataSource
+import com.catnip.mycoin.data.local.preference.datasource.LocalDataSourceImpl
 import com.catnip.mycoin.data.network.datasource.auth.AuthApiDataSource
 import com.catnip.mycoin.data.network.datasource.auth.AuthApiDataSourceImpl
 import com.catnip.mycoin.data.network.datasource.coin.CoinGeckoDataSource

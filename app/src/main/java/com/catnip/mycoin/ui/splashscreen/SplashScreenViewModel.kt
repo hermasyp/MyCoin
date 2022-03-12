@@ -2,9 +2,9 @@ package com.catnip.mycoin.ui.splashscreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.catnip.mycoin.base.Resource
+import com.catnip.mycoin.base.model.Resource
+import com.catnip.mycoin.base.arch.BaseViewModelImpl
 import com.catnip.mycoin.data.network.model.response.auth.UserData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +17,7 @@ Github : https://github.com/hermasyp
  **/
 @HiltViewModel
 class SplashScreenViewModel @Inject constructor(private val repository: SplashScreenRepository) :
-    ViewModel(), SplashScreenContract.ViewModel {
+    BaseViewModelImpl(), SplashScreenContract.ViewModel {
 
     private val syncUserLiveData = MutableLiveData<Resource<UserData>>()
 

@@ -1,15 +1,12 @@
 package com.catnip.mycoin.ui.register
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.activity.viewModels
 import com.catnip.mycoin.R
-import com.catnip.mycoin.base.BaseActivity
-import com.catnip.mycoin.base.Resource
+import com.catnip.mycoin.base.arch.BaseActivity
+import com.catnip.mycoin.base.model.Resource
 import com.catnip.mycoin.data.network.model.request.auth.AuthRequest
 import com.catnip.mycoin.databinding.ActivityRegisterBinding
 import com.catnip.mycoin.ui.login.LoginActivity
@@ -17,7 +14,7 @@ import com.catnip.mycoin.utils.StringUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegisterActivity : BaseActivity<ActivityRegisterBinding,RegisterViewModel>(
+class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel>(
     ActivityRegisterBinding::inflate
 ), RegisterContract.View {
 
@@ -87,13 +84,13 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding,RegisterViewModel>
     }
 
     override fun initView() {
-        initViewModel()
+        observeData()
         setToolbar()
         setOnClick()
     }
 
-    override fun initViewModel() {
-        getViewModel().getRegisterResponseLiveData().observe(this, { response ->
+    override fun observeData() {
+        getViewModel().getRegisterResponseLiveData().observe(this) { response ->
             when (response) {
                 is Resource.Loading -> {
                     setLoadingState(true)
@@ -108,7 +105,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding,RegisterViewModel>
                     Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
                 }
             }
-        })
+        }
     }
 
     override fun setOnClick() {
@@ -125,5 +122,4 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding,RegisterViewModel>
         }
     }
 
-    override val viewModelInstance: RegisterViewModel by viewModels()
 }

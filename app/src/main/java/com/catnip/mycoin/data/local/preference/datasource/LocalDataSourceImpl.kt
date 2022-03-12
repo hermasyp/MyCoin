@@ -1,6 +1,6 @@
-package com.catnip.mycoin.data.local.datasource
+package com.catnip.mycoin.data.local.preference.datasource
 
-import com.catnip.mycoin.data.local.SessionPreference
+import com.catnip.mycoin.data.local.preference.SessionPreference
 import javax.inject.Inject
 
 /**

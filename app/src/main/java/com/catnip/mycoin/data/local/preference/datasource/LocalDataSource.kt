@@ -1,4 +1,4 @@
-package com.catnip.mycoin.data.local.datasource
+package com.catnip.mycoin.data.local.preference.datasource
 
 /**
 Written with love by Muhammad Hermas Yuda Pamungkas

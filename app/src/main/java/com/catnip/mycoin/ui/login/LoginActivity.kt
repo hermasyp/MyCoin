@@ -3,10 +3,9 @@ package com.catnip.mycoin.ui.login
 import android.content.Intent
 import android.view.View
 import android.widget.Toast
-import androidx.activity.viewModels
 import com.catnip.mycoin.R
-import com.catnip.mycoin.base.BaseActivity
-import com.catnip.mycoin.base.Resource
+import com.catnip.mycoin.base.arch.BaseActivity
+import com.catnip.mycoin.base.model.Resource
 import com.catnip.mycoin.data.network.model.request.auth.AuthRequest
 import com.catnip.mycoin.databinding.ActivityLoginBinding
 import com.catnip.mycoin.ui.coinlist.CoinListActivity
@@ -88,13 +87,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
     }
 
     override fun initView() {
-        initViewModel()
+        observeData()
         setToolbar()
         setOnClick()
     }
 
-    override fun initViewModel() {
-        getViewModel().getLoginResultLiveData().observe(this, { response ->
+
+    override fun observeData() {
+        getViewModel().getLoginResultLiveData().observe(this) { response ->
             when (response) {
                 is Resource.Loading -> {
                     setLoadingState(true)
@@ -115,7 +115,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
                     ).show()
                 }
             }
-        })
+        }
     }
 
     override fun saveSessionLogin(authToken: String?) {
@@ -124,5 +124,4 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
         }
     }
 
-    override val viewModelInstance: LoginViewModel by viewModels()
 }

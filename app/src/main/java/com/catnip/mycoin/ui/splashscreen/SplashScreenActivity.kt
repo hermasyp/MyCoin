@@ -3,12 +3,9 @@ package com.catnip.mycoin.ui.splashscreen
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.catnip.mycoin.base.BaseActivity
-import com.catnip.mycoin.base.Resource
+import com.catnip.mycoin.base.arch.BaseActivity
+import com.catnip.mycoin.base.model.Resource
 import com.catnip.mycoin.databinding.ActivitySplashScreenBinding
 import com.catnip.mycoin.ui.coinlist.CoinListActivity
 import com.catnip.mycoin.ui.login.LoginActivity
@@ -18,7 +15,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding,SplashScreenViewModel>(
+class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding, SplashScreenViewModel>(
     ActivitySplashScreenBinding::inflate
 ), SplashScreenContract.View {
 
@@ -31,7 +28,7 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding,SplashScre
         supportActionBar?.hide()
     }
 
-    override fun initViewModel() {
+    override fun observeData() {
         getViewModel().getSyncUserLiveData().observe(this) {
             when (it) {
                 is Resource.Loading -> {
@@ -82,6 +79,4 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding,SplashScre
     companion object {
         private val TAG = SplashScreenActivity::class.simpleName
     }
-
-    override val viewModelInstance: SplashScreenViewModel by viewModels()
 }

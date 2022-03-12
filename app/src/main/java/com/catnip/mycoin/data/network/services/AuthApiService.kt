@@ -1,7 +1,7 @@
 package com.catnip.mycoin.data.network.services
 
 import com.catnip.mycoin.BuildConfig
-import com.catnip.mycoin.data.local.datasource.LocalDataSource
+import com.catnip.mycoin.data.local.preference.datasource.LocalDataSource
 import com.catnip.mycoin.data.network.model.request.auth.AuthRequest
 import com.catnip.mycoin.data.network.model.response.auth.BaseAuthResponse
 import com.catnip.mycoin.data.network.model.response.auth.UserData

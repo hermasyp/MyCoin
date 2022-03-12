@@ -2,9 +2,9 @@ package com.catnip.mycoin.ui.register
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.catnip.mycoin.base.Resource
+import com.catnip.mycoin.base.model.Resource
+import com.catnip.mycoin.base.arch.BaseViewModelImpl
 import com.catnip.mycoin.data.network.model.request.auth.AuthRequest
 import com.catnip.mycoin.data.network.model.response.auth.UserData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +18,7 @@ Github : https://github.com/hermasyp
  **/
 @HiltViewModel
 class RegisterViewModel @Inject constructor(private val repository: RegisterRepository) :
-    ViewModel(), RegisterContract.ViewModel {
+    BaseViewModelImpl(), RegisterContract.ViewModel {
     private val registerUserLiveData = MutableLiveData<Resource<UserData>>()
 
     override fun getRegisterResponseLiveData(): LiveData<Resource<UserData>> = registerUserLiveData

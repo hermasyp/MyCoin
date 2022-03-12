@@ -1,6 +1,6 @@
 package com.catnip.mycoin.di
 
-import com.catnip.mycoin.data.local.datasource.LocalDataSource
+import com.catnip.mycoin.data.local.preference.datasource.LocalDataSource
 import com.catnip.mycoin.data.network.datasource.auth.AuthApiDataSource
 import com.catnip.mycoin.data.network.datasource.coin.CoinGeckoDataSource
 import com.catnip.mycoin.ui.coindetail.CoinDetailRepository

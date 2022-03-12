@@ -1,6 +1,7 @@
 package com.catnip.mycoin.ui.coinlist
 
-import com.catnip.mycoin.data.local.datasource.LocalDataSource
+import com.catnip.mycoin.base.arch.BaseRepositoryImpl
+import com.catnip.mycoin.data.local.preference.datasource.LocalDataSource
 import com.catnip.mycoin.data.network.datasource.coin.CoinGeckoDataSource
 import com.catnip.mycoin.data.network.model.response.coin.Coin
 import javax.inject.Inject
@@ -13,8 +14,7 @@ class CoinListRepository
 @Inject constructor(
     private val dataSource: CoinGeckoDataSource,
     private val localDataSource: LocalDataSource
-) :
-    CoinListContract.Repository {
+) : BaseRepositoryImpl(),CoinListContract.Repository {
     override suspend fun getCoinList(): List<Coin> {
         return dataSource.getCoinList()
     }

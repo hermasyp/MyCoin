@@ -1,7 +1,7 @@
 package com.catnip.mycoin.ui.splashscreen
 
 import androidx.lifecycle.LiveData
-import com.catnip.mycoin.base.Resource
+import com.catnip.mycoin.base.model.Resource
 import com.catnip.mycoin.data.network.model.response.auth.BaseAuthResponse
 import com.catnip.mycoin.data.network.model.response.auth.UserData
 
@@ -12,7 +12,6 @@ Github : https://github.com/hermasyp
 interface SplashScreenContract {
     interface View {
         fun initView()
-        fun initViewModel()
         fun checkLoginStatus()
         fun deleteSession()
         fun navigateToLogin()

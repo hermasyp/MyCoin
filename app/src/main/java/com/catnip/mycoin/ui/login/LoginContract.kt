@@ -1,7 +1,8 @@
 package com.catnip.mycoin.ui.login
 
 import androidx.lifecycle.LiveData
-import com.catnip.mycoin.base.Resource
+import com.catnip.mycoin.base.model.Resource
+import com.catnip.mycoin.base.arch.BaseContract
 import com.catnip.mycoin.data.network.model.request.auth.AuthRequest
 import com.catnip.mycoin.data.network.model.response.auth.BaseAuthResponse
 import com.catnip.mycoin.data.network.model.response.auth.UserData
@@ -11,9 +12,7 @@ Written with love by Muhammad Hermas Yuda Pamungkas
 Github : https://github.com/hermasyp
  **/
 interface LoginContract {
-    interface View {
-        fun initView()
-        fun initViewModel()
+    interface View : BaseContract.BaseView {
         fun setToolbar()
         fun setOnClick()
         fun navigateToHome()
@@ -23,13 +22,13 @@ interface LoginContract {
         fun saveSessionLogin(authToken : String?)
     }
 
-    interface ViewModel {
+    interface ViewModel : BaseContract.BaseViewModel {
         fun getLoginResultLiveData(): LiveData<Resource<UserData>>
         fun saveSession(authToken: String)
         fun loginUser(loginRequest: AuthRequest)
     }
 
-    interface Repository {
+    interface Repository : BaseContract.BaseRepository {
         fun saveSession(authToken: String)
         suspend fun postLoginUser(loginRequest: AuthRequest): BaseAuthResponse<UserData, String>
     }

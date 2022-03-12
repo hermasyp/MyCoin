@@ -3,9 +3,9 @@ package com.catnip.mycoin.ui.coindetail
 import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.catnip.mycoin.base.Resource
+import com.catnip.mycoin.base.model.Resource
+import com.catnip.mycoin.base.arch.BaseViewModelImpl
 import com.catnip.mycoin.data.network.model.response.coin.detail.CoinDetailResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +18,7 @@ Github : https://github.com/hermasyp
  **/
 @HiltViewModel
 class CoinDetailViewModel @Inject constructor(private val repository: CoinDetailRepository) :
-    ViewModel(), CoinDetailContract.ViewModel {
+    BaseViewModelImpl(), CoinDetailContract.ViewModel {
 
     private var coinDetailLiveData = MutableLiveData<Resource<CoinDetailResponse>>()
     private var coinId = MutableLiveData<String?>()
