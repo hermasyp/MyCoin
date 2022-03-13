@@ -1,5 +1,5 @@
 # MyCoin
-An app to fetch list of crypto coin/token based on API CoinGecko
+An app to fetch list of crypto coin/token based on API CoinGecko and Authentification using Binar Academy Auth Example API 
 
 ## Tech Stack
 - MVVM
