@@ -3,6 +3,7 @@ package com.catnip.mycoin.ui.login
 import android.content.Intent
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import com.catnip.mycoin.R
 import com.catnip.mycoin.base.arch.BaseActivity
 import com.catnip.mycoin.base.model.Resource
@@ -51,8 +52,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
         startActivity(intent)
     }
 
-    override fun setLoadingState(isLoadingVisible: Boolean) {
-        getViewBinding().pbLoading.visibility = if (isLoadingVisible) View.VISIBLE else View.GONE
+    override fun showLoading(isVisible: Boolean) {
+        getViewBinding().pbLoading.isVisible = isVisible
     }
 
     override fun checkFormValidation(): Boolean {
@@ -97,17 +98,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
         getViewModel().getLoginResultLiveData().observe(this) { response ->
             when (response) {
                 is Resource.Loading -> {
-                    setLoadingState(true)
+                    showLoading(true)
                 }
                 is Resource.Success -> {
-                    setLoadingState(false)
+                    showLoading(false)
                     Toast.makeText(this, R.string.text_login_success, Toast.LENGTH_SHORT).show()
-                    saveSessionLogin(response.data?.token)
                     navigateToHome()
 
                 }
                 is Resource.Error -> {
-                    setLoadingState(false)
+                    showLoading(false)
                     Toast.makeText(
                         this,
                         "Login Failed, Please check email and password correctly",
@@ -115,12 +115,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
                     ).show()
                 }
             }
-        }
-    }
-
-    override fun saveSessionLogin(authToken: String?) {
-        authToken?.let {
-            getViewModel().saveSession(authToken)
         }
     }
 

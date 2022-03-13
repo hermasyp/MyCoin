@@ -3,7 +3,7 @@ package com.catnip.mycoin.ui.splashscreen
 import androidx.lifecycle.LiveData
 import com.catnip.mycoin.base.model.Resource
 import com.catnip.mycoin.data.network.model.response.auth.BaseAuthResponse
-import com.catnip.mycoin.data.network.model.response.auth.UserData
+import com.catnip.mycoin.data.network.model.response.auth.User
 
 /**
 Written with love by Muhammad Hermas Yuda Pamungkas
@@ -19,7 +19,7 @@ interface SplashScreenContract {
     }
 
     interface ViewModel {
-        fun getSyncUserLiveData(): LiveData<Resource<UserData>>
+        fun getSyncUserLiveData(): LiveData<Resource<User>>
         fun isUserLoggedIn(): Boolean
         fun clearSession()
         fun getSyncUser()
@@ -28,6 +28,6 @@ interface SplashScreenContract {
     interface Repository {
         fun isUserLoggedIn(): Boolean
         fun clearSession()
-        suspend fun getSyncUser(): BaseAuthResponse<UserData, String>
+        suspend fun getSyncUser(): BaseAuthResponse<User, String>
     }
 }

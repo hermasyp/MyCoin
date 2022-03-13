@@ -3,6 +3,7 @@ package com.catnip.mycoin.ui.coinlist
 import androidx.lifecycle.LiveData
 import com.catnip.mycoin.base.model.Resource
 import com.catnip.mycoin.base.arch.BaseContract
+import com.catnip.mycoin.data.network.model.response.auth.User
 import com.catnip.mycoin.data.network.model.response.coin.Coin
 
 /**
@@ -20,10 +21,12 @@ interface CoinListContract {
         fun getCoinListLiveData(): LiveData<Resource<List<Coin>>>
         fun getCoinList()
         fun deleteSession()
+        fun getUserData() : User?
     }
 
     interface Repository : BaseContract.BaseRepository{
         suspend fun getCoinList(): List<Coin>
         fun deleteSession()
+        fun getUserData() : User?
     }
 }

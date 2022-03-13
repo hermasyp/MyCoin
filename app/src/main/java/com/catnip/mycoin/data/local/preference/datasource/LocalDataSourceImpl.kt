@@ -1,6 +1,7 @@
 package com.catnip.mycoin.data.local.preference.datasource
 
 import com.catnip.mycoin.data.local.preference.SessionPreference
+import com.catnip.mycoin.data.network.model.response.auth.User
 import javax.inject.Inject
 
 /**
@@ -21,7 +22,15 @@ class LocalDataSourceImpl
         return !sessionPreference.authToken.isNullOrEmpty()
     }
 
-    override fun deleteSession() {
+    override fun saveUserData(user: User) {
+        sessionPreference.user = user
+    }
+
+    override fun getUserData(): User? {
+        return sessionPreference.user
+    }
+
+    override fun clearSession() {
         sessionPreference.deleteSession()
     }
 }

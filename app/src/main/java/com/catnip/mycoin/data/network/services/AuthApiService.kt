@@ -4,7 +4,7 @@ import com.catnip.mycoin.BuildConfig
 import com.catnip.mycoin.data.local.preference.datasource.LocalDataSource
 import com.catnip.mycoin.data.network.model.request.auth.AuthRequest
 import com.catnip.mycoin.data.network.model.response.auth.BaseAuthResponse
-import com.catnip.mycoin.data.network.model.response.auth.UserData
+import com.catnip.mycoin.data.network.model.response.auth.User
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -23,19 +23,19 @@ Github : https://github.com/hermasyp
  **/
 interface AuthApiService {
     @POST("auth/login")
-    suspend fun postLoginUser(@Body loginRequest: AuthRequest): BaseAuthResponse<UserData, String>
+    suspend fun postLoginUser(@Body loginRequest: AuthRequest): BaseAuthResponse<User, String>
 
     @POST("auth/register")
-    suspend fun postRegisterUser(@Body registerRequest: AuthRequest): BaseAuthResponse<UserData, String>
+    suspend fun postRegisterUser(@Body registerRequest: AuthRequest): BaseAuthResponse<User, String>
 
     @GET("auth/me")
-    suspend fun getSyncUser(): BaseAuthResponse<UserData, String>
+    suspend fun getSyncUser(): BaseAuthResponse<User, String>
 
     @GET("users")
-    suspend fun getUserData(): BaseAuthResponse<UserData, String>
+    suspend fun getUserData(): BaseAuthResponse<User, String>
 
     @PUT("users")
-    suspend fun putUserData(@Body data: RequestBody): BaseAuthResponse<UserData, String>
+    suspend fun putUserData(@Body data: RequestBody): BaseAuthResponse<User, String>
 
 
     companion object {

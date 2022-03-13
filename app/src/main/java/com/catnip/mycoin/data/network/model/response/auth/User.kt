@@ -6,13 +6,15 @@ import com.google.gson.annotations.SerializedName
 Written with love by Muhammad Hermas Yuda Pamungkas
 Github : https://github.com/hermasyp
  **/
-data class UserData(
+data class User(
     @SerializedName("_id")
-    val id: String?,
+    var id: String?,
     @SerializedName("username")
-    val username: String?,
+    var username: String?,
     @SerializedName("email")
-    val email: String?,
+    var email: String?,
+    @SerializedName("photo")
+    var photo: String?,
     @SerializedName("token")
-    val token: String?
+    var token: String?
 )

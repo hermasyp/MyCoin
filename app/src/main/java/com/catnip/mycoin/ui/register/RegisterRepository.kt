@@ -4,7 +4,7 @@ import com.catnip.mycoin.base.arch.BaseRepositoryImpl
 import com.catnip.mycoin.data.network.datasource.auth.AuthApiDataSource
 import com.catnip.mycoin.data.network.model.request.auth.AuthRequest
 import com.catnip.mycoin.data.network.model.response.auth.BaseAuthResponse
-import com.catnip.mycoin.data.network.model.response.auth.UserData
+import com.catnip.mycoin.data.network.model.response.auth.User
 import javax.inject.Inject
 
 /**
@@ -15,7 +15,7 @@ class RegisterRepository
 @Inject constructor(
     private val authApiDataSource: AuthApiDataSource
 ) : BaseRepositoryImpl(), RegisterContract.Repository {
-    override suspend fun postRegisterUser(registerRequest: AuthRequest): BaseAuthResponse<UserData, String> {
+    override suspend fun postRegisterUser(registerRequest: AuthRequest): BaseAuthResponse<User, String> {
         return authApiDataSource.postRegisterUser(registerRequest)
     }
 }

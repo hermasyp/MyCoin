@@ -16,4 +16,9 @@ object Extension {
             Html.fromHtml(htmlString)
         }
     }
+    inline fun <T : Any> safeLet(vararg elements: T?, closure: (List<T>) -> Unit) {
+        if (elements.all { it != null }) {
+            closure(elements.filterNotNull())
+        }
+    }
 }

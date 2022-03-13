@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.catnip.mycoin.base.model.Resource
 import com.catnip.mycoin.base.arch.BaseViewModelImpl
-import com.catnip.mycoin.data.network.model.response.auth.UserData
+import com.catnip.mycoin.data.network.model.response.auth.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,9 +19,9 @@ Github : https://github.com/hermasyp
 class SplashScreenViewModel @Inject constructor(private val repository: SplashScreenRepository) :
     BaseViewModelImpl(), SplashScreenContract.ViewModel {
 
-    private val syncUserLiveData = MutableLiveData<Resource<UserData>>()
+    private val syncUserLiveData = MutableLiveData<Resource<User>>()
 
-    override fun getSyncUserLiveData(): LiveData<Resource<UserData>> = syncUserLiveData
+    override fun getSyncUserLiveData(): LiveData<Resource<User>> = syncUserLiveData
 
     override fun isUserLoggedIn(): Boolean {
         return repository.isUserLoggedIn()

@@ -91,16 +91,8 @@ class CoinDetailActivity :
     }
 
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            onBackPressed()
-        }
-        return super.onOptionsItemSelected(item)
-
-    }
-
-    private fun generateChips(categories: List<String>?) {
-        categories?.filter { it.isNotEmpty() }?.forEach {
+    private fun generateChips(categories: List<String?>?) {
+        categories?.filter { !it.isNullOrEmpty() }?.forEach {
             getViewBinding().cgCategory.addView(
                 Chip(this).apply {
                     text = it

@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.catnip.mycoin.base.model.Resource
 import com.catnip.mycoin.base.arch.BaseViewModelImpl
 import com.catnip.mycoin.data.network.model.request.auth.AuthRequest
-import com.catnip.mycoin.data.network.model.response.auth.UserData
+import com.catnip.mycoin.data.network.model.response.auth.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,9 +19,9 @@ Github : https://github.com/hermasyp
 @HiltViewModel
 class RegisterViewModel @Inject constructor(private val repository: RegisterRepository) :
     BaseViewModelImpl(), RegisterContract.ViewModel {
-    private val registerUserLiveData = MutableLiveData<Resource<UserData>>()
+    private val registerUserLiveData = MutableLiveData<Resource<User>>()
 
-    override fun getRegisterResponseLiveData(): LiveData<Resource<UserData>> = registerUserLiveData
+    override fun getRegisterResponseLiveData(): LiveData<Resource<User>> = registerUserLiveData
 
     override fun registerUser(registerRequest: AuthRequest) {
         registerUserLiveData.value = Resource.Loading()

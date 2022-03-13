@@ -2,18 +2,17 @@ package com.catnip.mycoin.ui.coinlist
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.catnip.mycoin.R
 import com.catnip.mycoin.base.arch.BaseActivity
 import com.catnip.mycoin.base.model.Resource
 import com.catnip.mycoin.data.network.model.response.coin.Coin
 import com.catnip.mycoin.databinding.ActivityCoinListBinding
 import com.catnip.mycoin.ui.coindetail.CoinDetailActivity
-import com.catnip.mycoin.ui.login.LoginActivity
+import com.catnip.mycoin.ui.profile.ProfileActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,14 +34,31 @@ class CoinListActivity : BaseActivity<ActivityCoinListBinding, CoinListViewModel
     override fun initView() {
         initSwipeRefresh()
         initList()
+        setupToolbar()
     }
 
-    override fun showLoading(isLoading: Boolean) {
-        getViewBinding().pbLoading.isVisible = isLoading
+    private fun setupToolbar() {
+        setSupportActionBar(getViewBinding().toolbar)
+        supportActionBar?.subtitle = getString(R.string.text_subtitle_toolbar_list)
+        getViewBinding().ivProfilePict.apply {
+            load(getViewModel().getUserData()?.photo) {
+                crossfade(true)
+                placeholder(R.drawable.ic_placeholder_profile)
+                transformations(CircleCropTransformation())
+            }
+            setOnClickListener {
+                startActivity(Intent(this@CoinListActivity,ProfileActivity::class.java))
+            }
+        }
+
     }
 
-    override fun showContent(isContentShown: Boolean) {
-        getViewBinding().rvContent.isVisible = isContentShown
+    override fun showLoading(isVisible: Boolean) {
+        getViewBinding().pbLoading.isVisible = isVisible
+    }
+
+    override fun showContent(isVisible: Boolean) {
+        getViewBinding().rvContent.isVisible = isVisible
     }
 
     override fun showError(isErrorEnabled: Boolean, msg: String?) {
@@ -93,46 +109,6 @@ class CoinListActivity : BaseActivity<ActivityCoinListBinding, CoinListViewModel
             getViewBinding().srlContent.isRefreshing = false
             getData()
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_coin_list, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.menu_logout -> {
-                showDialogLogout()
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun showDialogLogout() {
-        AlertDialog.Builder(this)
-            .apply {
-                setTitle(getString(R.string.text_logout_dialog))
-                setPositiveButton(R.string.text_dialog_logout_task_positive) { dialog, _ ->
-                    logout()
-                    dialog.dismiss()
-                }
-                setNegativeButton(R.string.text_dialog_logout_task_negative) { dialog, _ ->
-                    dialog.dismiss()
-                }
-            }.create().show()
-    }
-
-    private fun logout() {
-        getViewModel().deleteSession()
-        navigateToLogin()
-    }
-
-    private fun navigateToLogin() {
-        val intent = Intent(this, LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
-        finish()
     }
 
 }

@@ -4,6 +4,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -13,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyCoin"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ui.profile.ProfileActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.register.RegisterActivity"
             android:exported="false" />
@@ -30,10 +38,20 @@
         </activity>
         <activity
             android:name=".ui.coinlist.CoinListActivity"
+            android:theme="@style/Theme.MyCoin.NoToolbar"
             android:exported="true" />
         <activity
             android:name=".ui.coindetail.CoinDetailActivity"
             android:exported="false" />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths" />
+        </provider>
     </application>
 
 </manifest>

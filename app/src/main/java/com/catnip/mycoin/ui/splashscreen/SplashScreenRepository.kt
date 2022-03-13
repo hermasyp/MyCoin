@@ -4,7 +4,7 @@ import com.catnip.mycoin.base.arch.BaseRepositoryImpl
 import com.catnip.mycoin.data.local.preference.datasource.LocalDataSource
 import com.catnip.mycoin.data.network.datasource.auth.AuthApiDataSource
 import com.catnip.mycoin.data.network.model.response.auth.BaseAuthResponse
-import com.catnip.mycoin.data.network.model.response.auth.UserData
+import com.catnip.mycoin.data.network.model.response.auth.User
 import javax.inject.Inject
 
 /**
@@ -20,10 +20,10 @@ class SplashScreenRepository @Inject constructor(
     }
 
     override fun clearSession() {
-        localDataSource.deleteSession()
+        localDataSource.clearSession()
     }
 
-    override suspend fun getSyncUser(): BaseAuthResponse<UserData, String> {
+    override suspend fun getSyncUser(): BaseAuthResponse<User, String> {
         return authApiDataSource.getSyncUser()
     }
 }

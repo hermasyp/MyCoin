@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.catnip.mycoin.base.model.Resource
 import com.catnip.mycoin.base.arch.BaseViewModelImpl
 import com.catnip.mycoin.data.network.model.request.auth.AuthRequest
-import com.catnip.mycoin.data.network.model.response.auth.UserData
+import com.catnip.mycoin.data.network.model.response.auth.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,13 +20,9 @@ Github : https://github.com/hermasyp
 class LoginViewModel @Inject constructor(private val repository: LoginRepository) :
     BaseViewModelImpl(), LoginContract.ViewModel {
 
-    private val syncUserLiveData = MutableLiveData<Resource<UserData>>()
+    private val syncUserLiveData = MutableLiveData<Resource<User>>()
 
-    override fun getLoginResultLiveData(): LiveData<Resource<UserData>> = syncUserLiveData
-
-    override fun saveSession(authToken: String) {
-        repository.saveSession(authToken)
-    }
+    override fun getLoginResultLiveData(): LiveData<Resource<User>> = syncUserLiveData
 
     override fun loginUser(loginRequest: AuthRequest) {
         syncUserLiveData.value = Resource.Loading()

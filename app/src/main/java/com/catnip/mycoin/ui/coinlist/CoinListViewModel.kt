@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.catnip.mycoin.base.model.Resource
 import com.catnip.mycoin.base.arch.BaseViewModelImpl
+import com.catnip.mycoin.data.network.model.response.auth.User
 import com.catnip.mycoin.data.network.model.response.coin.Coin
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -42,6 +43,10 @@ class CoinListViewModel @Inject constructor(private val repository: CoinListRepo
 
     override fun deleteSession() {
         repository.deleteSession()
+    }
+
+    override fun getUserData(): User? {
+        return repository.getUserData()
     }
 
 }

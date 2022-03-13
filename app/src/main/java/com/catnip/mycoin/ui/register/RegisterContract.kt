@@ -5,7 +5,7 @@ import com.catnip.mycoin.base.model.Resource
 import com.catnip.mycoin.base.arch.BaseContract
 import com.catnip.mycoin.data.network.model.request.auth.AuthRequest
 import com.catnip.mycoin.data.network.model.response.auth.BaseAuthResponse
-import com.catnip.mycoin.data.network.model.response.auth.UserData
+import com.catnip.mycoin.data.network.model.response.auth.User
 
 /**
 Written with love by Muhammad Hermas Yuda Pamungkas
@@ -22,11 +22,11 @@ interface RegisterContract {
     }
 
     interface ViewModel : BaseContract.BaseViewModel {
-        fun getRegisterResponseLiveData(): LiveData<Resource<UserData>>
+        fun getRegisterResponseLiveData(): LiveData<Resource<User>>
         fun registerUser(registerRequest: AuthRequest)
     }
 
     interface Repository : BaseContract.BaseRepository {
-        suspend fun postRegisterUser(registerRequest: AuthRequest): BaseAuthResponse<UserData, String>
+        suspend fun postRegisterUser(registerRequest: AuthRequest): BaseAuthResponse<User, String>
     }
 }

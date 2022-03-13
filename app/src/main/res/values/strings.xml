@@ -19,6 +19,13 @@
     <string name="text_dialog_logout_task_positive">Yes</string>
     <string name="text_dialog_logout_task_negative">No</string>
     <string name="text_icon_menu_logout">Logout</string>
-    <string name="text_logout_dialog">Do you want to Logout ?</string>
+    <string name="text_logout_dialog_title">Logout Profile</string>
+    <string name="text_logout_dialog_msg">Do you want to Logout ?</string>
+    <string name="text_btn_save_profile">Save Profile</string>
+    <string name="text_title_toolbar_profile">Profile</string>
+    <string name="text_change_profile_success">Change Profile Success !</string>
+    <string name="text_toast_permission_declined">Please grant storage permission to select Image</string>
+    <string name="text_btn_logout">Logout</string>
+    <string name="text_subtitle_toolbar_list">List of Crypto Coins</string>
 
 </resources>

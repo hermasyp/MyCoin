@@ -6,13 +6,15 @@
     android:layout_marginBottom="4dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardBackgroundColor="@color/grey_700"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp">
+        android:padding="16dp">
 
         <ImageView
             android:id="@+id/iv_icon_coin"

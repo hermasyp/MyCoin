@@ -6,6 +6,8 @@ import com.catnip.mycoin.ui.coinlist.CoinListRepository
 import com.catnip.mycoin.ui.coinlist.CoinListViewModel
 import com.catnip.mycoin.ui.login.LoginRepository
 import com.catnip.mycoin.ui.login.LoginViewModel
+import com.catnip.mycoin.ui.profile.ProfileRepository
+import com.catnip.mycoin.ui.profile.ProfileViewModel
 import com.catnip.mycoin.ui.register.RegisterRepository
 import com.catnip.mycoin.ui.register.RegisterViewModel
 import com.catnip.mycoin.ui.splashscreen.SplashScreenRepository
@@ -14,6 +16,8 @@ import com.catnip.notepadplusplus.base.arch.GenericViewModelFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.scopes.ActivityScoped
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -23,11 +27,11 @@ Github : https://github.com/hermasyp
  **/
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ActivityComponent::class)
 object ViewModelModule {
 
     @Provides
-    @Singleton
+    @ActivityScoped
     fun provideCoinDetailViewModel(
         coinDetailRepository: CoinDetailRepository
     ): CoinDetailViewModel {
@@ -36,7 +40,7 @@ object ViewModelModule {
         )
     }
     @Provides
-    @Singleton
+    @ActivityScoped
     fun provideCoinListViewModel(
         coinListRepository: CoinListRepository
     ): CoinListViewModel {
@@ -45,7 +49,7 @@ object ViewModelModule {
         )
     }
     @Provides
-    @Singleton
+    @ActivityScoped
     fun provideLoginViewModel(
         loginRepository: LoginRepository
     ): LoginViewModel {
@@ -54,7 +58,7 @@ object ViewModelModule {
         )
     }
     @Provides
-    @Singleton
+    @ActivityScoped
     fun provideRegisterViewModel(
         registerRepository: RegisterRepository
     ): RegisterViewModel {
@@ -63,12 +67,21 @@ object ViewModelModule {
         )
     }
     @Provides
-    @Singleton
+    @ActivityScoped
     fun provideSplashScreenViewModel(
         splashScreenRepository: SplashScreenRepository
     ): SplashScreenViewModel {
         return GenericViewModelFactory(SplashScreenViewModel(splashScreenRepository)).create(
             SplashScreenViewModel::class.java
+        )
+    }
+    @Provides
+    @ActivityScoped
+    fun provideProfileViewModel(
+        profileRepository: ProfileRepository
+    ): ProfileViewModel {
+        return GenericViewModelFactory(ProfileViewModel(profileRepository)).create(
+            ProfileViewModel::class.java
         )
     }
 }
