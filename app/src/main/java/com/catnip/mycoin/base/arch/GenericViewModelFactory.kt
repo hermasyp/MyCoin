@@ -1,8 +1,7 @@
-package com.catnip.notepadplusplus.base.arch
+package com.catnip.mycoin.base.arch
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import java.lang.IllegalArgumentException
 
 /**
 Written with love by Muhammad Hermas Yuda Pamungkas
