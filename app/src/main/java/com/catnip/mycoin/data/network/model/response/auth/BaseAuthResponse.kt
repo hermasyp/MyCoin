@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName
 
 data class BaseAuthResponse<D,E>(
     @SerializedName("data")
-    var data: D?,
+    var data: D,
     @SerializedName("success")
-    var success: Boolean?,
+    var success: Boolean,
     @SerializedName("errors")
-    var errors: E?
+    var errors: E
 )
 
