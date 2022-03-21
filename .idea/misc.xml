@@ -15,6 +15,7 @@
         <entry key="app/src/main/res/drawable/ic_placeholder_profile.xml" value="0.242" />
         <entry key="app/src/main/res/layout/activity_coin_detail.xml" value="0.4244791666666667" />
         <entry key="app/src/main/res/layout/activity_coin_list.xml" value="0.4244791666666667" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.4244791666666667" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.4244791666666667" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.4244791666666667" />
         <entry key="app/src/main/res/layout/item_coin.xml" value="0.23229166666666667" />

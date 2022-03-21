@@ -10,9 +10,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".App"
         android:theme="@style/Theme.MyCoin"
         android:usesCleartextTraffic="true">
         <activity
+            android:theme="@style/Theme.MyCoin.NoToolbar"
             android:name=".ui.coinlist.CoinListActivity"
             android:exported="false" />
         <activity

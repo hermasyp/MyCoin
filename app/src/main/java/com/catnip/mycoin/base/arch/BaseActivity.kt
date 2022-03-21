@@ -61,4 +61,5 @@ abstract class BaseActivity<B : ViewBinding, VM : ViewModel>(
         }
         return super.onOptionsItemSelected(item)
     }
+
 }

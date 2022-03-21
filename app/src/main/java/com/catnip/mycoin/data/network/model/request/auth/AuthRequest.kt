@@ -8,9 +8,9 @@ Github : https://github.com/hermasyp
  **/
 data class AuthRequest(
     @SerializedName("email")
-    var email: String?,
+    var email: String? = null,
     @SerializedName("username")
-    var username: String?,
+    var username: String? = null,
     @SerializedName("password")
-    var password: String?,
+    var password: String? = null,
 )

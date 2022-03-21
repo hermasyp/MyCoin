@@ -7,7 +7,7 @@ data class BaseAuthResponse<D,E>(
     @SerializedName("data")
     var data: D,
     @SerializedName("success")
-    var success: Boolean,
+    var isSuccess: Boolean,
     @SerializedName("errors")
     var errors: E
 )
