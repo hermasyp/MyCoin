@@ -10,6 +10,7 @@ import com.catnip.mycoin.base.arch.BaseActivity
 import com.catnip.mycoin.base.model.Resource
 import com.catnip.mycoin.data.network.model.response.coin.list.Coin
 import com.catnip.mycoin.databinding.ActivityCoinListBinding
+import com.catnip.mycoin.ui.coindetail.CoinDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -48,7 +49,7 @@ class CoinListActivity :
 
     override fun initList() {
         adapter = CoinListAdapter {
-            //todo : open detail
+            CoinDetailActivity.startActivity(this, it.id.orEmpty())
         }
         getViewBinding().rvContent.apply {
             layoutManager = LinearLayoutManager(this@CoinListActivity)

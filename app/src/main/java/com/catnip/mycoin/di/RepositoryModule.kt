@@ -4,6 +4,7 @@ import com.catnip.mycoin.data.local.datasource.LocalDataSource
 import com.catnip.mycoin.data.network.datasource.auth.AuthApiDataSource
 import com.catnip.mycoin.data.network.datasource.coin.CoinGeckoDataSource
 import com.catnip.mycoin.data.network.services.CoinGeckoApiServices
+import com.catnip.mycoin.ui.coindetail.CoinDetailRepository
 import com.catnip.mycoin.ui.coinlist.CoinListRepository
 import com.catnip.mycoin.ui.login.LoginRepository
 import com.catnip.mycoin.ui.register.RegisterRepository
@@ -55,6 +56,12 @@ object RepositoryModule {
         localDataSource: LocalDataSource
     ) : CoinListRepository {
         return CoinListRepository(coinGeckoDataSource,localDataSource)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCoinDetailRepository(coinGeckoDataSource: CoinGeckoDataSource): CoinDetailRepository {
+        return CoinDetailRepository(coinGeckoDataSource)
     }
 
 }

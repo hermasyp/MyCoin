@@ -1,6 +1,8 @@
 package com.catnip.mycoin.di
 
 import com.catnip.mycoin.base.arch.GenericViewModelFactory
+import com.catnip.mycoin.ui.coindetail.CoinDetailRepository
+import com.catnip.mycoin.ui.coindetail.CoinDetailViewModel
 import com.catnip.mycoin.ui.coinlist.CoinListRepository
 import com.catnip.mycoin.ui.coinlist.CoinListViewModel
 import com.catnip.mycoin.ui.login.LoginRepository
@@ -61,4 +63,13 @@ object ViewModelModule {
         )
     }
 
+    @Provides
+    @ActivityScoped
+    fun provideCoinDetailViewModel(
+        coinDetailRepository: CoinDetailRepository
+    ): CoinDetailViewModel {
+        return GenericViewModelFactory(CoinDetailViewModel(coinDetailRepository)).create(
+            CoinDetailViewModel::class.java
+        )
+    }
 }
