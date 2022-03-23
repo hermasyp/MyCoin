@@ -7,6 +7,7 @@ import com.catnip.mycoin.data.network.services.CoinGeckoApiServices
 import com.catnip.mycoin.ui.coindetail.CoinDetailRepository
 import com.catnip.mycoin.ui.coinlist.CoinListRepository
 import com.catnip.mycoin.ui.login.LoginRepository
+import com.catnip.mycoin.ui.profile.ProfileRepository
 import com.catnip.mycoin.ui.register.RegisterRepository
 import com.catnip.mycoin.ui.splashscreen.SplashScreenRepository
 import dagger.Module
@@ -64,4 +65,14 @@ object RepositoryModule {
         return CoinDetailRepository(coinGeckoDataSource)
     }
 
+    @Singleton
+    @Provides
+    fun provideProfileRepository(
+        authApiDataSource: AuthApiDataSource,
+        localDataSource: LocalDataSource
+    ) : ProfileRepository {
+        return ProfileRepository(authApiDataSource,localDataSource)
+    }
+
+    
 }

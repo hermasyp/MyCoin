@@ -25,7 +25,7 @@ interface CoinListContract {
     }
 
     interface Repository : BaseContract.BaseRepository{
-        suspend fun getCoinList(): List<Coin>
+        suspend fun getCoinList(): Resource<List<Coin>>
         fun getUserData() : User?
     }
 }

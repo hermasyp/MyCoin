@@ -26,19 +26,9 @@ class CoinListViewModel @Inject constructor(private val repository: CoinListRepo
 
     override fun getCoinList() {
         coinListResponseLiveData.value = Resource.Loading()
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val response = repository.getCoinList()
-                viewModelScope.launch(Dispatchers.Main) {
-                    coinListResponseLiveData.value = Resource.Success(response)
-                }
-            } catch (e: Exception) {
-                viewModelScope.launch(Dispatchers.Main) {
-                    coinListResponseLiveData.value = Resource.Error(e.message.orEmpty())
-                }
-            }
+        viewModelScope.launch {
+            coinListResponseLiveData.value = repository.getCoinList()
         }
-
     }
 
 

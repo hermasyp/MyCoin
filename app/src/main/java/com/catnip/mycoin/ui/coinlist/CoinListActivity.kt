@@ -1,5 +1,6 @@
 package com.catnip.mycoin.ui.coinlist
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +12,7 @@ import com.catnip.mycoin.base.model.Resource
 import com.catnip.mycoin.data.network.model.response.coin.list.Coin
 import com.catnip.mycoin.databinding.ActivityCoinListBinding
 import com.catnip.mycoin.ui.coindetail.CoinDetailActivity
+import com.catnip.mycoin.ui.profile.ProfileActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,7 +43,7 @@ class CoinListActivity :
                 transformations(CircleCropTransformation())
             }
             setOnClickListener {
-                //todo : navigate to profile page
+                startActivity(Intent(this@CoinListActivity,ProfileActivity::class.java))
             }
         }
 

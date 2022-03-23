@@ -7,6 +7,8 @@ import com.catnip.mycoin.ui.coinlist.CoinListRepository
 import com.catnip.mycoin.ui.coinlist.CoinListViewModel
 import com.catnip.mycoin.ui.login.LoginRepository
 import com.catnip.mycoin.ui.login.LoginViewModel
+import com.catnip.mycoin.ui.profile.ProfileRepository
+import com.catnip.mycoin.ui.profile.ProfileViewModel
 import com.catnip.mycoin.ui.register.RegisterRepository
 import com.catnip.mycoin.ui.register.RegisterViewModel
 import com.catnip.mycoin.ui.splashscreen.SplashScreenRepository
@@ -70,6 +72,16 @@ object ViewModelModule {
     ): CoinDetailViewModel {
         return GenericViewModelFactory(CoinDetailViewModel(coinDetailRepository)).create(
             CoinDetailViewModel::class.java
+        )
+    }
+
+    @Provides
+    @ActivityScoped
+    fun provideProfileViewModel(
+        repository: ProfileRepository
+    ): ProfileViewModel {
+        return GenericViewModelFactory(ProfileViewModel(repository)).create(
+            ProfileViewModel::class.java
         )
     }
 }
